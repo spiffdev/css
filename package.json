@@ -1,7 +1,7 @@
 {
   "name": "css",
-  "version": "3.0.0",
-  "description": "CSS parser / stringifier",
+  "version": "3.0.1",
+  "description": "CSS parser",
   "main": "index",
   "files": [
     "index.js",
@@ -9,9 +9,7 @@
     "Readme.md"
   ],
   "dependencies": {
-    "inherits": "^2.0.4",
-    "source-map": "^0.6.1",
-    "source-map-resolve": "^0.6.0"
+    "inherits": "^2.0.4"
   },
   "devDependencies": {
     "mocha": "^8.0.1",
@@ -32,7 +30,6 @@
   "keywords": [
     "css",
     "parser",
-    "stringifier",
     "stylesheet"
   ]
 }

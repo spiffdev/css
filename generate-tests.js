@@ -4,7 +4,6 @@
 var fs = require('fs');
 var path = require('path');
 var parse = require('./').parse;
-var stringify = require('./').stringify;
 
 var casesDir = path.join(__dirname, 'test', 'cases');
 var cases = fs.readdirSync(casesDir)
@@ -22,26 +21,5 @@ cases.forEach(function(dir) {
     } catch(e) {
         console.log('Failed to parse', inputFile);
         throw e;
-    }
-
-    var outputFile = path.join(dir, 'output.css');
-    if (!fs.existsSync(outputFile)) {
-        console.log('Generating', outputFile);
-        var output = stringify(parsed);
-        fs.writeFileSync(outputFile, output, 'utf8');
-    }
-
-    var compressedFile = path.join(dir, 'compressed.css');
-    if (!fs.existsSync(compressedFile)) {
-        console.log('Generating', compressedFile);
-        var compressed = stringify(parsed, { compress: true });
-        fs.writeFileSync(compressedFile, compressed, 'utf8');
-    }
-
-    var astFile = path.join(dir, 'ast.json');
-    if (!fs.existsSync(astFile)) {
-        console.log('Generating', astFile);
-        var ast = JSON.stringify(parsed, null, '  ');
-        fs.writeFileSync(astFile, ast, 'utf8');
     }
 });

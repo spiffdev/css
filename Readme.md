@@ -11,7 +11,6 @@ CSS parser / stringifier.
 ```js
 var css = require('css');
 var obj = css.parse('body { font-size: 12px; }', options);
-css.stringify(obj, options);
 ```
 
 ## API
@@ -25,55 +24,6 @@ Accepts a CSS string and returns an AST `object`.
 - silent: silently fail on parse errors.
 - source: the path to the file containing `css`. Makes errors and source
   maps more helpful, by letting them know where code comes from.
-
-### css.stringify(object, [options])
-
-Accepts an AST `object` (as `css.parse` produces) and returns a CSS string.
-
-`options`:
-
-- indent: the string used to indent the output. Defaults to two spaces.
-- compress: omit comments and extraneous whitespace.
-- sourcemap: return a sourcemap along with the CSS output. Using the `source`
-  option of `css.parse` is strongly recommended when creating a source map.
-  Specify `sourcemap: 'generator'` to return the SourceMapGenerator object
-  instead of serializing the source map.
-- inputSourcemaps: (enabled by default, specify `false` to disable) reads any
-  source maps referenced by the input files when generating the output source
-  map. When enabled, file system access may be required for reading the
-  referenced source maps.
-
-### Example
-
-```js
-var ast = css.parse('body { font-size: 12px; }', { source: 'source.css' });
-
-var css = css.stringify(ast);
-
-var result = css.stringify(ast, { sourcemap: true });
-result.code // string with CSS
-result.map // source map object
-```
-
-### Errors
-
-Errors thrown during parsing have the following properties:
-
-- message: `String`. The full error message with the source position.
-- reason: `String`. The error message without position.
-- filename: `String` or `undefined`. The value of `options.source` if
-  passed to `css.parse`. Otherwise `undefined`.
-- line: `Integer`.
-- column: `Integer`.
-- source: `String`. The portion of code that couldn't be parsed.
-
-When parsing with the `silent` option, errors are listed in the
-`parsingErrors` property of the [`stylesheet`](#stylesheet) node instead
-of being thrown.
-
-If you create any errors in plugins such as in
-[rework](https://github.com/reworkcss/rework), you __must__ set the same
-properties for consistency.
 
 ## AST
 
